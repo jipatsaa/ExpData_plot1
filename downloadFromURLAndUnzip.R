@@ -3,6 +3,7 @@ downloadFromURLAndUnzip <- function  (fileUrl="http://dir.csv", workdirPath=".",
   # 1. url to download
   # 2. the target directory to dump the information
   # 3. the name of the zip file 
+ 
   # POST: The file will be downloaded and unzip in the targetdirectory (creating the last one if it does not exist)  
 {
   fileUnzip<-sub(".zip","",fileName)
