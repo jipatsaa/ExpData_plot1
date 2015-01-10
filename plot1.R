@@ -11,7 +11,7 @@ namesData<-names(data)
 originalDataNames<-c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")
 if((numberObs==2075259) && (namesData==originalDataNames)){
 
-  #converting the data and time from Strings to Date and Time 
+  #converting the data from Strings to Date
   aux<-as.Date(data$Date,"%d/%m/%Y")
   daysShortName<-format(aux,"%a")  #obtain the day short name for each Date #i.e. lun, mar, mie, jue, vie
   data$Date<-aux
@@ -19,16 +19,14 @@ if((numberObs==2075259) && (namesData==originalDataNames)){
   rm(aux)
   rm(daysShortName)
   
-  aux<-strptime(data$Time,format="%H:%M:%S")
-  data$Time<-aux2
-  rm(aux) 
+ 
   
   #personal comment: Ez dut ulertzen zergaitik ez dabilen transform
   # transform(dataSet,Global_active_power=as.numeric(dataSet$Global_active_power))
   
   dataSet<-subset(data,Date=="2007-02-01"|Date=="2007-02-02")
      
-     
+    
      aux<-as.numeric(dataSet$Global_active_power)
      dataSet$Global_active_power<-aux
      rm(aux)
