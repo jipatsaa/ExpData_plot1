@@ -3,26 +3,46 @@ source("readCSV.R")
 
 downloadFromURLAndUnzip("https://d396qusza40orc.cloudfront.net","data","exdata_data_household_power_consumption.zip")
 data<-readCSV("./data","household_power_consumption.txt",";",FALSE)
-#denbora emanez gero date horiek Date datu motara pasatu beharko lirateke
 
-numberObs<-nrows(data)
+#Checking the correctness of the data
+numberObs<-nrow(data)
 namesData<-names(data)
+originalDataNames<-c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")
+if((numberObs==2075259) && (namesData==originalDataNames)){
 
-if((numberObs!=2075259)|names!=c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")){
-  stop("Number of obs or features not correct. Check the data file")
-}
-else{dataSet<-subset(data,Date=="1/2/2007"|Date=="2/2/2007")
-     #fork Peng's repository 
-     # go to  https://github.com/rdpeng/ExData_Plotting1
-     # and on the right upside corner click on fork
+  #converting the data and time from Strings to Date and Time 
+  aux<-as.Date(data$Date,"%d/%m/%Y")
+  daysShortName<-format(aux,"%a")  #obtain the day short name for each Date #i.e. lun, mar, mie, jue, vie
+  data$Date<-aux
+  data$dayShortName<-daysShortName
+  rm(aux)
+  rm(daysShortName)
+  
+  aux<-strptime(data$Time,format="%H:%M:%S")
+  data$Time<-aux2
+  rm(aux) 
+  
+  #personal comment: Ez dut ulertzen zergaitik ez dabilen transform
+  # transform(dataSet,Global_active_power=as.numeric(dataSet$Global_active_power))
+  
+  dataSet<-subset(data,Date=="2007-02-01"|Date=="2007-02-02")
      
-     #ez dut ulertzen zergaitik ez dabilen transform
-     # transform(dataSet,Global_active_power=as.numeric(dataSet$Global_active_power))
      
      aux<-as.numeric(dataSet$Global_active_power)
      dataSet$Global_active_power<-aux
      rm(aux)
-     hist(dataSet$Global_active_power,xlab="Global Active Power (kilowatts)",main="Global Active Power",col="red")
      
-     #falta da frekuentzien eskala aldatzea
+     #adapting the margins
+     par(mar=c(4,4,3,1))
+  
+     #shrinking using the cex flag: the labels (cex.lab)
+     # the title (cex.main)
+     #the axis scales (cex.axis)
+     hist(dataSet$Global_active_power,xlab="Global Active Power (kilowatts)",main="Global Active Power",col="red",cex.main=0.75,cex.axis=0.75,cex.lab=0.75)
+     dev.copy2png(plo1.png)
+     
+}else{
+  
+   stop("Number of obs or features not correct. Check the data file")
+
 }
