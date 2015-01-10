@@ -1,5 +1,6 @@
 source("downloadFromURLAndUnzip.R")
 source("readCSV.R")
+source("dev.copy2png.R")
 
 downloadFromURLAndUnzip("https://d396qusza40orc.cloudfront.net","data","exdata_data_household_power_consumption.zip")
 data<-readCSV("./data","household_power_consumption.txt",";",FALSE)
@@ -39,7 +40,7 @@ if((numberObs==2075259) && (namesData==originalDataNames)){
      # the title (cex.main)
      #the axis scales (cex.axis)
      hist(dataSet$Global_active_power,xlab="Global Active Power (kilowatts)",main="Global Active Power",col="red",cex.main=0.75,cex.axis=0.75,cex.lab=0.75)
-     dev.copy2png(plo1.png)
+     dev.copy2png("plot1.png")
      
 }else{
   
