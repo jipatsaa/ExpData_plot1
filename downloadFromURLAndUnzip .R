@@ -11,6 +11,7 @@ downloadFromURLAndUnzip <- function  (fileUrl="http://dir.csv", workdirPath=".",
   print(fileAndPath)
   
   ## Step 0: Checking existence of file
+  
   if(!file.exists(fileAndPath)){
     ## Step 1: Checking dir and creating if needed
     if(!file.exists(workdirPath))
