@@ -54,7 +54,7 @@ if((numberObs==2075259) && (namesData==originalDataNames)){
      lines(dataSet$dayTime,dataSet$Sub_metering_2,col="red",ylab="Energy sub meeting",xlab="")
      lines(dataSet$dayTime,dataSet$Sub_metering_3,col="blue",ylab="Energy sub meeting",xlab="")
      
-     legend("topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=c(1,1,1),lwd=c(2.5,2.5),col=c("black","red","blue"),cex=.5)
+     legend("topright",c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=c(1,1,1),lwd=c(2.5,2.5),col=c("black","red","blue"),cex=.6)
     
      dev.copy2png("plot3.png")
      
